@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head th:insert="fragments/general.html :: encabezado">
+    <meta charset="UTF-8">
+    <title>Inicio</title>
+</head>
+<body>
+<div th:insert="fragments/general.html :: navegacion"></div>
+<div class="center-container fondo-color">
+    <div class="container fondo-color">
+        <brands>
+            <img class="img-fluid mx-auto d-block" th:src="@{/logo.jpg}" th:alt="logo" style="width: 500px">
+        </brands>
+        <hr>
+        <div>
+            <h1>Integrantes:</h1>
+            <h2>Durán Díaz, Ivonne Esmeralda</h2>
+            <h2>Medina Montero, Laura Lorena</h2>
+            <h2>Salguero Torres, Javier</h2>
+        </div>
+    </div>
+</div>
+<div th:insert="fragments/general.html :: pieDePagina"></div>
+<div th:insert="fragments/general.html :: scripts"></div>
+</body>
+</html>
