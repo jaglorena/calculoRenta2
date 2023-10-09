@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="master">
+<head th:insert="fragments/general.html :: encabezado">
+    <title>Empleado</title>
+</head>
+<body >
+<div th:insert="fragments/general.html :: navegacion"></div>
+<main class="d-flex flex-column mt-0">
+    <header class="text-black p-0" style="Background-color: #FFDEB8;">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-4">
+                    <brands>
+                        <img class="rounded mx-auto d-block" th:src="@{/logo.jpg}" th:alt="logo" style="width: 150px">
+                    </brands>
+                </div>
+                <div class="col-md-8">
+                    <h1 class="mb-0">Datos del empleado</h1>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="container">
+        <div th:if="${mensaje!=null}" class="toast-container position-fixed bottom-0 end-0 p-3">
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    Empleado guardado con &eacute;xito
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+        </div>
+
+        <div class="container mt-5">
+            <div class="contact__wrapper shadow-lg mt-n9 pt-10">
+                <div class="row no-gutters">
+                    <div class="col-lg-12 contact-form__wrapper p-5 order-lg-1">
+                        <form method="post" action="/empleado" class="contact-form form-validate" novalidate="novalidate">
+                            <div class="row">
+                                <div class="col-sm-5 mb-3">
+                                    <label class="form-label mb-3 required-field font-weight-bold" for="dui">Dui:</label>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control"  id="dui" name="dui"  placeholder="#Dui del empleado">
+                                    </div>
+                                </div>
+                                <div class="col-sm-5 mb-3">
+                                    <label class="form-label mb-3 required-field font-weight-bold" for="fechaNacimiento">Fecha de Nacimiento:</label>
+                                    <div class="form-group">
+                                        <input type="date" class="form-control" id="fechaNacimiento" name="fechaNacimiento" required>
+                                    </div>
+                                </div>
+                                <div class="col-sm-5 mb-3">
+                                    <label class="form-label mb-3 required-field font-weight-bold" for="nombre">Nombre:</label>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control"  id="nombre" name="nombre"  placeholder="Nombre del empleado">
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-5 mb-3">
+                                    <label class="form-label mb-3 required-field font-weight-bold" for="apellido">Apellido:</label>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="apellido" name="apellido"  placeholder="Apellido del empleado">
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-5 mb-3">
+                                    <label class="form-label mb-3 required-field font-weight-bold" for="cargo">Cargo:</label>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="cargo" name="cargo" placeholder="Cargo que desempeña">
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-5 mb-3">
+                                    <label class="form-label mb-3 required-field font-weight-bold" for="salario">Salario:</label>
+                                    <div class="form-group">
+                                        <input type="tel" class="form-control" id="salario" name="salario" placeholder="$">
+                                    </div>
+                                </div>
+                                <div class="col-sm-5 mb-3">
+                                    <label class="form-label mb-3 required-field font-weight-bold" for="fechaIngreso">Fecha de Ingreso:</label>
+                                    <div class="form-group">
+                                        <input type="date" class="form-control" id="fechaIngreso" name="fechaIngreso" required>
+                                    </div>
+                                </div>
+                                <div class="col-sm-5 mb-3">
+                                    <label class="form-label mb-3 required-field font-weight-bold" for="fechaSalida">Fecha de Salida:</label>
+                                    <div class="form-group">
+                                        <input type="date" class="form-control" id="fechaSalida" name="fechaSalida">
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary mt-4 col-md-3 btn-warning">Guardar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>
+
+<div th:insert="fragments/general.html :: pieDePagina"></div>
+<div th:insert="fragments/general.html :: scripts"></div>
+</body>
+</html>

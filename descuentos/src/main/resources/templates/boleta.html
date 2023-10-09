@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="master">
+<head th:insert="fragments/general.html :: encabezado">
+    <meta charset="UTF-8">
+    <title>Boleta</title>
+</head>
+<body>
+<div th:insert="fragments/general.html :: navegacion"></div>
+<header class="text-black p-0" style="Background-color: #FFDEB8;">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-4">
+                <brands>
+                    <img class="rounded mx-auto d-block" th:src="@{/logo.jpg}" th:alt="logo" style="width: 150px">
+                </brands>
+            </div>
+
+            <div class="col-md-8">
+                <h1 class="mb-0">Boleta de Pago</h1>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-6 col-sm-4">Nombre de empleado</div>
+        <div class="col-6 col-sm-4" th:text="${boletaDto.getNombreCompleto()}">Nombre Completo</div>
+
+        <!-- Force next columns to break to new line at md breakpoint and up -->
+        <div class="w-100 d-none d-md-block"></div>
+
+
+        <div class="col-6 col-sm-4">Cargo:</div>
+        <div class="col-6 col-sm-4" th:text="${boletaDto.getCargo()}">Gerente</div>
+
+        <div class="w-100 d-none d-md-block"></div>
+
+        <div class="col-6 col-sm-4">Periodo:</div>
+        <div class="col-6 col-sm-6" th:text="${boletaDto.getPeriodo()}">PLANILLA DE SUELDO DE 1 DE OCTUBRE AL 31 DE OCTUBRE DE 2023</div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <a th:href="${'/constancia/' + boletaDto.getDui()}" class="link">Generar Constancia de empleo</a>
+        </div>
+    </div>
+     <div class="row mt-5">
+         <div class="col-3 p-3 mb-2">
+             INGRESOS
+         </div>
+     </div>
+
+         <div class="h4 pb-2 mb-4 text-danger border-bottom border-danger"></div>
+         <table class="table">
+            <thead>
+             <tr>
+                 <th scope="col">CODIGO</th>
+                 <th scope="col">DESCRIPCION</th>
+                 <th scope="col">VALOR</th>
+             </tr>
+            </thead>
+             <tbody>
+             <tr th:each="ingreso : ${boletaDto.getIngresos()}">
+                 <td th:text="${ingreso.getId()}">ID</td>
+                 <td th:text="${ingreso.getDescripcion()}">Descripcion</td>
+                 <td th:text="${'$ ' + #numbers.formatDecimal(ingreso.getMonto(), 1, 'DEFAULT', 2, 'DEFAULT')}">$550</td>
+             </tr>
+             </tbody>
+         </table>
+     <div class="row mt-3">
+         <div class="w-100 d-none d-md-block"></div>
+         <div class="col-6 col-sm-4">TOTAL INGRESOS:</div>
+         <div th:text="${'$ ' + #numbers.formatDecimal(boletaDto.getTotalIngresos(), 1, 'DEFAULT', 2, 'DEFAULT')}" class="col-6 col-sm-4">$550</div>
+     </div>
+
+     <div class="row mt-5">
+         <div class="col-3 p-3 mb-2">
+             DESCUENTOS
+         </div>
+     </div>
+     <div class="h4 pb-2 mb-4 text-danger border-bottom border-danger"></div>
+     <table class="table">
+         <thead>
+         <tr>
+             <th scope="col">CODIGO</th>
+             <th scope="col">DESCRIPCION</th>
+             <th scope="col">VALOR</th>
+         </tr>
+         </thead>
+         <tbody>
+         <tr th:each="descuento : ${boletaDto.getDescuentos()}">
+             <td th:text="${descuento.getId()}">1</td>
+             <td th:text="${descuento.getDescripcion()}">Descripcion</td>
+             <td th:text="${'$ ' + #numbers.formatDecimal(descuento.getMonto(), 1, 'DEFAULT', 2, 'DEFAULT')}"></td>
+         </tr>
+         </tbody>
+     </table>
+     <div class="row mt-3">
+         <div class="w-100 d-none d-md-block"></div>
+
+         <div class="col-6 col-sm-4">TOTAL DESCUENTOS:</div>
+         <div class="col-6 col-sm-4" th:text="${'$ ' + #numbers.formatDecimal(boletaDto.getTotalDescuentos(), 1, 'DEFAULT', 2, 'DEFAULT')}">$550</div>
+     </div>
+     <div class="row mt-5">
+         <div class="col-3 p-3 mb-2">
+             RETENCIONES
+         </div>
+     </div>
+     <div class="h4 pb-2 mb-4 text-danger border-bottom border-danger"></div>
+     <table class="table">
+         <thead>
+             <tr>
+                 <th scope="col">CODIGO</th>
+                 <th scope="col">DESCRIPCION</th>
+                 <th scope="col">VALOR</th>
+             </tr>
+         </thead>
+         <tbody>
+         <tr th:each="retencion : ${boletaDto.getRetenciones()}">
+             <td th:text="${retencion.getId()}">1</td>
+             <td th:text="${retencion.getDescripcion()}">Descripcion</td>
+             <td th:text="${'$ ' + #numbers.formatDecimal(retencion.getMonto(), 1, 'DEFAULT', 2, 'DEFAULT')}"></td>
+         </tr>
+         </tbody>
+     </table>
+     <div class="row mt-3">
+         <div class="w-100 d-none d-md-block"></div>
+         <div class="col-6 col-sm-4">TOTAL RETENCIONES:</div>
+         <div class="col-6 col-sm-4" th:text="${'$ ' + #numbers.formatDecimal(boletaDto.getTotalRetenciones(), 1, 'DEFAULT', 2, 'DEFAULT')}">$550</div>
+     </div>
+
+    <div class="row mt-5">
+        <div class="col-3 p-3 mb-2">
+            INDEMNIZACIONES
+        </div>
+    </div>
+    <div class="h4 pb-2 mb-4 text-danger border-bottom border-danger"></div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">CODIGO</th>
+            <th scope="col">DESCRIPCION</th>
+            <th scope="col">VALOR</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="descuento : ${boletaDto.getIndemnizaciones()}">
+            <td th:text="${descuento.getId()}">1</td>
+            <td th:text="${descuento.getDescripcion()}">Descripcion</td>
+            <td th:text="${'$ ' + #numbers.formatDecimal(descuento.getMonto(), 1, 'DEFAULT', 2, 'DEFAULT')}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="row mt-3">
+        <div class="w-100 d-none d-md-block"></div>
+
+        <div class="col-6 col-sm-4">TOTAL INDEMNIZACIÓN:</div>
+        <div class="col-6 col-sm-4" th:text="${'$ ' + #numbers.formatDecimal(boletaDto.getTotalIndemnizacion(), 1, 'DEFAULT', 2, 'DEFAULT')}">$550</div>
+    </div>
+     <div class="row justify-content-center mt-4">
+         <div class="col-6 col-sm-4">
+             <table class="table">
+                 <thead>
+                 <tr>
+                     <th scope="col">TOTAL LIQUIDO A PAGAR</th>
+                     <th scope="col" th:text="${'$ ' + #numbers.formatDecimal(boletaDto.getTotalAPagar(), 1, 'DEFAULT', 2, 'DEFAULT')}">$500</th>
+                 </tr>
+                 </thead>
+
+             </table>
+         </div>
+     </div>
+ </div>
+
+<div th:insert="fragments/general.html :: pieDePagina"></div>
+<div th:insert="fragments/general.html :: scripts"></div>
+</body>
+</html>
